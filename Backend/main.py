@@ -1,3 +1,4 @@
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
@@ -6,7 +7,16 @@ from collections import defaultdict, deque
 
 app = FastAPI()
 
-# 🔴 THIS WAS MISSING
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # allow frontend calls
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://localhost:3000"],
